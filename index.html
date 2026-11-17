@@ -1,27 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#07111f"><meta name="description" content="World Sports Hub — global sports news, transfers, match updates and AI-powered summaries.">
-  <title>World Sports Hub | Global Sports News</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏆%3C/text%3E%3C/svg%3E">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Sports Hub - Live Football News</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#050d1a;color:#fff}
+header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e2d44}
+.logo{font-weight:900;font-size:20px;letter-spacing:1px}
+.logo span{color:#00c6ff}
+.hero{padding:50px 20px 20px;text-align:left}
+.hero h1{font-size:48px;line-height:0.95;font-weight:900}
+.hero h1 em{color:#5eead4;font-style:normal}
+.hero p{color:#a8b5c8;margin:18px 0 22px;line-height:1.5}
+.btn{background:#3ee6d8;color:#000;padding:13px 20px;font-weight:800;border:none;border-radius:2px;text-decoration:none;display:inline-block}
+.live-badge{display:inline-flex;gap:8px;align-items:center;background:#0a1a2e;border:1px solid #1e3a4a;padding:8px 12px;border-radius:20px;font-size:12px;letter-spacing:1px;color:#5eead4;margin-bottom:16px}
+.dot{width:8px;height:8px;background:#22ff88;border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%{opacity:1}50%{opacity:.3}100%{opacity:1}}
+section{padding:30px 20px}
+h2{font-size:28px;margin-bottom:6px}
+.sub{color:#a8b5c8;margin-bottom:20px}
+#news{display:grid;gap:16px}
+.card{background:#0d1b2e;border:1px solid #1e2d44;border-radius:12px;overflow:hidden}
+.card img{width:100%;height:180px;object-fit:cover;background:#16263d}
+.card-body{padding:16px}
+.card-body small{color:#5eead4;font-weight:700;letter-spacing:1px}
+.card-body h3{font-size:18px;margin:8px 0;line-height:1.3}
+.card-body p{color:#a8b5c8;font-size:14px;line-height:1.5}
+.card-body a{color:#fff;font-weight:700;display:inline-block;margin-top:12px;text-decoration:none}
+.loading{text-align:center;padding:40px;color:#a8b5c8}
+footer{text-align:center;padding:30px;color:#5b6b80;font-size:13px}
+</style>
 </head>
 <body>
-<header class="topbar"><a class="brand" href="#home"><span class="brand-mark">W</span><span>WORLD <b>SPORTS HUB</b><small>ONE WORLD. EVERY SPORT.</small></span></a><button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button><nav id="mainNav"><a href="#home" class="active">Home</a><a href="#football">Football</a><a href="#transfers">Transfers</a><a href="#basketball">Basketball</a><a href="#motorsport">Motorsport</a><a href="#more">More sports</a></nav><a class="top-cta" href="#latest">Latest news <span>↗</span></a></header>
-<main id="home">
-<section class="hero"><div class="hero-copy"><div class="eyebrow"><span class="live-dot"></span> GLOBAL SPORTS DESK</div><h1>THE WORLD<br>OF SPORTS.<br><em>IN ONE PLACE.</em></h1><p>Breaking stories, transfer updates, match insights and the biggest moments from sport around the world.</p><div class="hero-actions"><a class="btn primary" href="#latest">Explore latest news ↗</a><a class="btn ghost" href="#about">How it works</a></div><div class="hero-meta"><span>🌍 Global coverage</span><span>✦ AI-assisted summaries</span><span>↻ Daily updates</span></div></div><div class="hero-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-ball">⚽</div><div class="hero-tag tag-top">MATCHDAY <b>24/7</b></div><div class="hero-tag tag-bottom">ALL SPORTS. ALL STORIES.</div><div class="hero-stat"><strong>WORLDWIDE</strong><small>SPORTS COVERAGE</small></div></div></section>
-<section class="ticker"><span class="ticker-label">THE LATEST</span><div id="tickerText">Loading the latest sports headlines…</div></section>
-<section class="section" id="latest"><div class="section-head"><div><div class="eyebrow">WHAT'S HAPPENING</div><h2>Latest <em>stories</em></h2><p class="muted">Fresh sports coverage collected from news sources and summarised with AI.</p></div><div class="updated" id="lastUpdated">Checking updates…</div></div>
-<div class="filters" id="filters"><button class="filter active" data-category="all">All stories</button><button class="filter" data-category="Football">Football</button><button class="filter" data-category="Transfers">Transfers</button><button class="filter" data-category="Basketball">Basketball</button><button class="filter" data-category="Formula 1">Formula 1</button><button class="filter" data-category="Tennis">Tennis</button><button class="filter" data-category="Rugby">Rugby</button><button class="filter" data-category="Other">Other</button></div>
-<div class="search-row"><input id="searchInput" type="search" placeholder="Search teams, players or stories…"><span id="storyCount">Loading stories</span></div><div class="news-grid" id="newsGrid"><div class="loading-card">Loading World Sports Hub…</div></div><div class="empty hidden" id="emptyState">No stories found. Try another category or search.</div>
+<header><div class="logo">W <span>WORLD SPORTS HUB</span></div><div>☰</div></header>
+<div class="hero">
+<div class="live-badge"><span class="dot"></span> LIVE • FOOTBALL ONLY • UPDATED AUTOMATICALLY</div>
+<h1>THE WORLD<br>OF FOOTBALL.<br><em>IN ONE PLACE.</em></h1>
+<p>Breaking stories, transfer updates, match insights and the biggest moments from football around the world.</p>
+<a class="btn" href="#live">Explore Live News ↓</a>
+</div>
+
+<section id="live">
+<h2>⚽ Live Football News</h2>
+<p class="sub">Real stories from ESPN + BBC Sport. Refreshes every 5 minutes.</p>
+<div id="news"><div class="loading">Loading live football news... ⚽</div></div>
 </section>
-<section class="feature-band" id="about"><div><div class="eyebrow">THE SPORTS WORLD, CONNECTED</div><h2>More than headlines.<br><em>Context that matters.</em></h2><p>World Sports Hub brings together global sports reporting, match information and AI-assisted explanations. Every news summary links back to its original publisher.</p></div><div class="feature-points"><div><span>01</span><b>Discover</b><small>Stories from multiple sports and regions.</small></div><div><span>02</span><b>Understand</b><small>Concise summaries with clear source links.</small></div><div><span>03</span><b>Follow</b><small>Return for fresh updates throughout the week.</small></div></div></section>
-<section class="section sports-section" id="more"><div class="section-head"><div><div class="eyebrow">BEYOND THE PITCH</div><h2>Every sport has <em>a story.</em></h2></div></div><div class="sport-tiles"><a href="#latest" data-jump="Football"><span>⚽</span><b>Football</b><small>EPL · UCL · Global</small></a><a href="#latest" data-jump="Basketball"><span>🏀</span><b>Basketball</b><small>NBA · International</small></a><a href="#latest" data-jump="Formula 1"><span>🏎️</span><b>Motorsport</b><small>Formula 1 · Racing</small></a><a href="#latest" data-jump="Tennis"><span>🎾</span><b>Tennis</b><small>ATP · WTA</small></a><a href="#latest" data-jump="Rugby"><span>🏉</span><b>Rugby</b><small>World Rugby · Sevens</small></a><a href="#latest" data-jump="Other"><span>🏆</span><b>More sports</b><small>Across the world</small></a></div></section>
-<section class="newsletter"><div><div class="eyebrow">STAY IN THE GAME</div><h2>Never miss <em>the moment.</em></h2><p>Bookmark World Sports Hub and check back for the latest global sports stories.</p></div><a class="btn primary" href="#latest">Read the latest ↗</a></section>
-</main>
-<footer><a class="brand footer-brand" href="#home"><span class="brand-mark">W</span><span>WORLD <b>SPORTS HUB</b><small>ONE WORLD. EVERY SPORT.</small></span></a><p>Independent sports news discovery. Summaries are AI-assisted and link to original publishers. Video and broadcast rights remain with their respective owners.</p><div class="footer-bottom"><span>© <span id="year"></span> World Sports Hub</span><span>Built for sports fans everywhere 🌍</span></div></footer>
-<div class="toast" id="toast" role="status"></div>
-<script src="app.js"></script>
-</body></html>
+<footer>World Sports Hub • One World. Every Sport. • Powered by ESPN & BBC Sport</footer>
+
+<script>
+async function getNews(){
+  const box = document.getElementById('news');
+  const feeds = [
+    'https://api.rss2json.com/v1/api.json?rss_url=https://www.espn.com/espn/rss/soccer/news',
+    'https://api.rss2json.com/v1/api.json?rss_url=http://feeds.bbci.co.uk/sport/football/rss.xml'
+  ];
+  try{
+    let all = [];
+    for(let f of feeds){
+      let r = await fetch(f);
+      let j = await r.json();
+      if(j.items) all = all.concat(j.items);
+    }
+    // newest first, remove duplicates
+    all = all.filter((v,i,a)=>a.findIndex(t=>t.title===v.title)===i).slice(0,12);
+    if(all.length===0) throw new Error('empty');
+    box.innerHTML = all.map(a=>`
+      <article class="card">
+        ${a.thumbnail ? `<img src="${a.thumbnail}" onerror="this.style.display='none'">` : ''}
+        <div class="card-body">
+          <small>${a.pubDate ? new Date(a.pubDate).toLocaleString() : 'FOOTBALL'} • ${a.author||'ESPN / BBC'}</small>
+          <h3>${a.title}</h3>
+          <p>${(a.description||'').replace(/<[^>]*>/g,'').slice(0,140)}...</p>
+          <a href="${a.link}" target="_blank">Read Full Story →</a>
+        </div>
+      </article>
+    `).join('');
+  }catch(e){
+    box.innerHTML = `<div class="loading">⚠️ Live feed is loading slowly. Pull to refresh in a few seconds.<br><br><a href="https://www.espn.com/soccer/" target="_blank" style="color:#5eead4">Open ESPN Football →</a><br><br><a href="https://www.bbc.com/sport/football" target="_blank" style="color:#5eead4">Open BBC Football →</a></div>`;
+  }
+}
+getNews();
+setInterval(getNews, 300000);
+</script>
+</body>
+  </html>
