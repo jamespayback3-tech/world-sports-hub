@@ -1,0 +1,16 @@
+{
+  "name": "World Sports Hub",
+  "short_name": "World Sports Hub",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#e11d48",
+  "description": "Live Football News, Scores and Updates",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
