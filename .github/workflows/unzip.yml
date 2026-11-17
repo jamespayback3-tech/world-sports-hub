@@ -1,0 +1,18 @@
+name: Unzip Starter
+on: [push, workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unzip and commit files
+        run: |
+          unzip -o world-sports-hub-starter.zip
+          rm world-sports-hub-starter.zip
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Unzip starter files" || echo "nothing to commit"
+          git push
