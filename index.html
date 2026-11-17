@@ -1,93 +1,164 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#050d1a">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>World Sports Hub - One World. Every Sport.</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#050d1a;color:#fff;overflow-x:hidden}
-header{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e293b}
+body{background:#050d1a;color:#fff}
+header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1e293b;position:sticky;top:0;background:#050d1a;z-index:100}
 .logo-wrap{display:flex;align-items:center;gap:10px}
-.w-logo{width:42px;height:42px;border:2px solid #38bdf8;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:24px;color:#38bdf8;transform:skewX(-5deg)}
-.logo-text b{font-size:14px;letter-spacing:1px}
+.w-logo{width:40px;height:40px;border:2px solid #38bdf8;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;color:#38bdf8}
+.logo-text b{font-size:13px;letter-spacing:1px}
 .logo-text b span{color:#38bdf8}
-.logo-text small{font-size:9px;letter-spacing:2px;color:#94a3b8}
+.logo-text small{font-size:8px;letter-spacing:2px;color:#94a3b8}
 .menu{font-size:26px;cursor:pointer}
-.hero{padding:35px 20px 0}
-.badge{color:#5eeaad;font-size:11px;letter-spacing:2px;font-weight:700;display:flex;gap:8px;align-items:center}
-.dot{width:8px;height:8px;background:#2ff886;border-radius:50%;box-shadow:0 0 10px #2ff886}
-.hero h1{font-size:52px;line-height:0.95;font-weight:900;margin:18px 0 15px;letter-spacing:-1px}
+.hero{padding:28px 16px 10px}
+.badge{color:#5eeaad;font-size:11px;letter-spacing:2px;font-weight:700}
+.hero h1{font-size:48px;line-height:0.95;font-weight:900;margin:14px 0 12px}
 .hero h1 span{color:#5eeaad}
-.hero p{color:#94a3b8;line-height:1.6;font-size:15px;max-width:340px}
-.btns{display:flex;gap:10px;margin:22px 0}
-.btn1{background:#5eeaad;color:#000;padding:13px 16px;font-weight:800;font-size:13px;text-decoration:none}
-.btn2{border:1px solid #334155;color:#fff;padding:13px 16px;font-weight:700;font-size:13px;text-decoration:none}
-.features{display:flex;flex-wrap:wrap;gap:12px;color:#94a3b8;font-size:12px;margin-bottom:30px}
-.ball-section{position:relative;height:260px;display:flex;justify-content:center}
-.circle{width:300px;height:300px;border:1px solid #1e3a5f;border-radius:50%;position:absolute;top:20px}
-.circle2{width:220px;height:220px;border:1px solid #1e3a5f;border-radius:50%;position:absolute;top:55px}
-.ball{width:130px;height:130px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #fff, #94a3b8);display:flex;align-items:center;justify-content:center;font-size:75px;position:absolute;top:90px;box-shadow:0 0 60px rgba(94,234,212,.3)}
-.matchday{position:absolute;right:15px;top:10px;border:1px solid #334155;padding:8px 12px;font-size:11px;letter-spacing:1px;color:#94a3b8}
-.matchday b{color:#5eeaad}
-.worldwide{position:absolute;right:15px;bottom:0;background:#0f172a;padding:10px 14px;font-weight:900;letter-spacing:1px;border:1px solid #1e293b}
-section{padding:30px 20px}
-h2{font-size:22px;margin-bottom:15px}
-.card{background:#0f1e38;padding:14px;border-radius:12px;margin-bottom:10px;display:flex;gap:12px;align-items:center}
-.card img{width:65px;height:65px;object-fit:cover;border-radius:8px}
-.card b{font-size:14px;line-height:1.3}
-.card small{color:#94a3b8}
-.install{position:fixed;bottom:15px;left:15px;right:15px;background:#e11d48;color:#fff;border:0;padding:14px;border-radius:25px;font-weight:800;display:none}
+.hero p{color:#94a3b8;line-height:1.5;font-size:14px;max-width:340px}
+.btns{display:flex;gap:8px;margin:18px 0}
+.btn1{background:#5eeaad;color:#000;padding:12px 14px;font-weight:800;font-size:13px;text-decoration:none}
+.btn2{border:1px solid #334155;color:#fff;padding:12px 14px;font-weight:700;font-size:13px;text-decoration:none}
+/* OPERA MINI TABS */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:12px 16px;position:sticky;top:65px;background:#050d1a;z-index:90;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;padding:9px 16px;border-radius:20px;background:#0f172a;border:1px solid #1e293b;font-size:13px;font-weight:700;cursor:pointer}
+.tab.active{background:#5eeaad;color:#000;border-color:#5eeaad}
+#lastUpdated{padding:0 16px;color:#94a3b8;font-size:11px}
+/* OPERA STYLE FEED */
+.feed{padding:12px 16px 80px}
+.featured{display:block;text-decoration:none;color:#fff;border-radius:14px;overflow:hidden;background:#0f1e38;margin-bottom:14px}
+.featured img{width:100%;height:220px;object-fit:cover;display:block}
+.featured-body{padding:14px}
+.featured-body b{font-size:18px;line-height:1.3;display:block}
+.featured-body small{color:#94a3b8;display:block;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.op-card{display:block;text-decoration:none;color:#fff;background:#0f1e38;border-radius:12px;overflow:hidden}
+.op-card img{width:100%;height:110px;object-fit:cover}
+.op-card-body{padding:10px}
+.op-card-body b{font-size:13px;line-height:1.35;display:block;min-height:52px}
+.op-card-body small{color:#94a3b8;font-size:11px}
+.source-tag{display:inline-block;background:#e11d48;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:4px;margin-bottom:6px}
+.source-tag.espn{background:#cc0000}
+.source-tag.bbc{background:#bb1919}
+#drawer{position:fixed;top:0;right:-280px;width:260px;height:100%;background:#0f172a;z-index:999;transition:0.3s;padding:20px}
+#drawer a{display:block;color:#fff;text-decoration:none;padding:14px 0;border-bottom:1px solid #1e293b}
+.install{position:fixed;bottom:15px;left:15px;right:15px;background:#e11d48;color:#fff;border:0;padding:14px;border-radius:25px;font-weight:800;display:none;z-index:998}
+.ball-wrap{height:170px;position:relative;display:flex;justify-content:center;overflow:hidden}
+.ball{width:110px;height:110px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:65px;margin-top:20px}
 </style>
 </head>
 <body>
 <header>
-<div class="logo-wrap">
-<div class="w-logo">W</div>
-<div class="logo-text"><b>WORLD <span>SPORTS HUB</span></b><br><small>ONE WORLD. EVERY SPORT.</small></div>
-</div>
-<div class="menu" onclick="alert('Menu coming soon!')">☰</div>
+<div class="logo-wrap"><div class="w-logo">W</div><div class="logo-text"><b>WORLD <span>SPORTS HUB</span></b><br><small>ONE WORLD. EVERY SPORT.</small></div></div>
+<div class="menu" onclick="document.getElementById('drawer').style.right='0'">☰</div>
 </header>
 
 <div class="hero">
-<div class="badge"><span class="dot"></span> GLOBAL SPORTS DESK</div>
+<div class="badge">● GLOBAL SPORTS DESK</div>
 <h1>THE WORLD<br>OF SPORTS.<br><span>IN ONE PLACE.</span></h1>
 <p>Breaking stories, transfer updates, match insights and the biggest moments from sport around the world.</p>
-<div class="btns"><a class="btn1" href="#stories">Explore latest news ↗</a><a class="btn2" href="#stories">How It works</a></div>
-<div class="features"><span>🌍 Global coverage</span><span>✦ AI-assisted summaries</span><span>🕒 Daily updates</span></div>
+<div class="btns"><a class="btn1" href="#feed">Explore latest news ↗</a><a class="btn2" href="#feed">How It works</a></div>
 </div>
 
-<div class="ball-section">
-<div class="circle"></div><div class="circle2"></div>
-<div class="matchday">MATCHDAY &nbsp;<b>24/7</b></div>
-<div class="ball">⚽</div>
-<div class="worldwide">WORLDWIDE</div>
+<div class="ball-wrap"><div class="ball">⚽</div></div>
+
+<!-- OPERA MINI STYLE TABS -->
+<div class="tabs" id="tabs">
+<div class="tab active" onclick="filterNews('all',this)">🔥 For You</div>
+<div class="tab" onclick="filterNews('football',this)">⚽ Football</div>
+<div class="tab" onclick="filterNews('basketball',this)">🏀 Basketball</div>
+<div class="tab" onclick="filterNews('tennis',this)">🎾 Tennis</div>
+<div class="tab" onclick="filterNews('cricket',this)">🏏 Cricket</div>
+<div class="tab" onclick="filterNews('athletics',this)">🏃 Athletics</div>
+</div>
+<p id="lastUpdated">Loading fresh news from BBC + ESPN...</p>
+
+<!-- OPERA MINI FEED -->
+<div class="feed" id="feed">
+<div id="newsList">
+<div class="featured"><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800"><div class="featured-body"><b>Loading BBC Sport & ESPN...</b><small>Please wait...</small></div></div>
+</div>
 </div>
 
-<section id="stories">
-<h2>Top Stories</h2>
-<div class="card"><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=200"><div><b>Premier League: Arsenal secure 2-0 win over Chelsea</b><br><small>45 min ago</small></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=200"><div><b>NBA: Lakers defeat Warriors in overtime thriller</b><br><small>1 hour ago</small></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200"><div><b>Harambee Stars prepare for AFCON qualifier</b><br><small>2 hours ago</small></div></div>
-</section>
+<div id="drawer">
+<div style="display:flex;justify-content:space-between"><b>WORLD SPORTS HUB</b><span onclick="document.getElementById('drawer').style.right='-280px'" style="font-size:24px;cursor:pointer">✕</span></div><br>
+<a href="#feed" onclick="filterNews('all');document.getElementById('drawer').style.right='-280px'">📰 For You</a>
+<a href="#feed" onclick="filterNews('football');document.getElementById('drawer').style.right='-280px'">⚽ Football</a>
+<a href="#feed" onclick="filterNews('basketball');document.getElementById('drawer').style.right='-280px'">🏀 Basketball</a>
+<a href="#feed" onclick="filterNews('tennis');document.getElementById('drawer').style.right='-280px'">🎾 Tennis</a>
+<a href="#feed" onclick="filterNews('cricket');document.getElementById('drawer').style.right='-280px'">🏏 Cricket</a>
+<a href="#feed" onclick="filterNews('athletics');document.getElementById('drawer').style.right='-280px'">🏃 Athletics</a>
+<br><div style="background:#5eeaad;color:#000;padding:12px;text-align:center;font-weight:800;border-radius:8px">MATCHDAY 24/7 • LIVE</div>
+</div>
 
 <button class="install" id="installBtn">Install App</button>
 
 <script>
 if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
 let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault(); deferredPrompt = e;
-  document.getElementById('installBtn').style.display = 'block';
-});
-document.getElementById('installBtn').addEventListener('click', async () => {
-  if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; }
-});
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; document.getElementById('installBtn').style.display = 'block'; });
+document.getElementById('installBtn').addEventListener('click', async () => { if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; } });
+
+let allNews = [];
+let currentFilter = 'all';
+function getCategory(t){
+  t=t.toLowerCase();
+  if(t.includes('nba')||t.includes('lakers')||t.includes('basketball')||t.includes('warriors')) return 'basketball';
+  if(t.includes('tennis')||t.includes('alcaraz')||t.includes('sinner')||t.includes('wimbledon')) return 'tennis';
+  if(t.includes('cricket')||t.includes('t20')||t.includes('test match')) return 'cricket';
+  if(t.includes('athletics')||t.includes('marathon')||t.includes('kipyegon')||t.includes('olympic')) return 'athletics';
+  return 'football';
+}
+function timeAgo(d){
+  let diff=(new Date()-new Date(d))/1000;
+  if(diff<60) return 'Just now';
+  if(diff<3600) return Math.floor(diff/60)+' min ago';
+  if(diff<86400) return Math.floor(diff/3600)+' hours ago';
+  return Math.floor(diff/86400)+' days ago';
+}
+async function fetchFeed(url){
+  try{ let r=await fetch('https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(url)); let d=await r.json(); return d.items||[]; }catch(e){ return []; }
+}
+async function loadNews(){
+  let bbc=await fetchFeed('https://feeds.bbci.co.uk/sport/rss.xml');
+  let espn=await fetchFeed('https://www.espn.com/espn/rss/news');
+  let combined=[];
+  bbc.forEach(i=> combined.push({title:i.title,link:i.link,img:i.thumbnail||'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600',source:'BBC SPORT',cls:'bbc',date:i.pubDate}));
+  espn.forEach(i=> combined.push({title:i.title,link:i.link,img:i.thumbnail||'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600',source:'ESPN',cls:'espn',date:i.pubDate}));
+  combined.sort((a,b)=> new Date(b.date)-new Date(a.date));
+  if(combined.length>0) allNews=combined;
+  renderNews();
+  document.getElementById('lastUpdated').textContent='Updated '+new Date().toLocaleTimeString()+' • '+allNews.length+' stories • BBC + ESPN • Auto-refresh every 5 min • Tap card to read';
+}
+function renderNews(){
+  let list=allNews.filter(n=> currentFilter==='all' || getCategory(n.title)===currentFilter);
+  if(list.length===0) list=allNews;
+  let first=list[0];
+  let rest=list.slice(1,21);
+  let html='';
+  if(first){
+    html+=`<a class="featured" href="${first.link}" target="_blank"><img src="${first.img}" onerror="this.src='https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800'"><div class="featured-body"><span class="source-tag ${first.cls}">${first.source}</span><b>${first.title}</b><small>${timeAgo(first.date)} • Tap to read full story ↗</small></div></a>`;
+  }
+  html+='<div class="grid">';
+  html+=rest.map(n=>`<a class="op-card" href="${n.link}" target="_blank"><img src="${n.img}" onerror="this.src='https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400'"><div class="op-card-body"><span class="source-tag ${n.cls}">${n.source}</span><b>${n.title}</b><small>${timeAgo(n.date)}</small></div></a>`).join('');
+  html+='</div>';
+  document.getElementById('newsList').innerHTML=html;
+}
+function filterNews(cat,el){
+  currentFilter=cat;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderNews();
+}
+loadNews();
+setInterval(loadNews, 300000);
 </script>
 </body>
   </html>
