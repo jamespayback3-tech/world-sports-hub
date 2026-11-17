@@ -1,0 +1,26 @@
+name: Daily sports news automation
+on:
+  schedule:
+    - cron: '15 6 * * *' # 09:15 East Africa Time (UTC+3)
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect, summarise and publish sports news
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-2.5-flash-lite
+          MAX_PER_FEED: '4'
+        run: python scripts/collect_news.py
